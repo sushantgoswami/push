@@ -3,7 +3,6 @@
 #       Author:         Sushant Goswami
 #       Creation:       16-Dec-2021
 #       Version:        0.01
-#       Purpose:        Push the sudoers file via ssh to all LLY/GUTS hosts
 #       Todo:
 #       NOTE:           This file generate and use separate files to push the sudoers in parallel
 #
@@ -20,17 +19,17 @@
 
 ##################### User Defined Variables #########################
 export ZONE=ALL
-export PRIMARY_EMAIL=Tcs_Platform_Linux@lists.lilly.com
-export SECONDARY_EMAIL_1=goswami_sushant@network.lilly.com
-export SECONDARY_EMAIL_2=goswami_sushant@network.lilly.com
-export SECONDARY_EMAIL_3=goswami_sushant@network.lilly.com
+export PRIMARY_EMAIL=Tcs_Platform_Linux@lists.mydomain.com
+export SECONDARY_EMAIL_1=goswami_sushant@network.mydomain.com
+export SECONDARY_EMAIL_2=goswami_sushant@network.mydomain.com
+export SECONDARY_EMAIL_3=goswami_sushant@network.mydomain.com
 export PRIMARY_EMAIL_ENABLE=1
 export SECONDARY_EMAIL_ENABLE_1=1
 export SECONDARY_EMAIL_ENABLE_2=0
 export SECONDARY_EMAIL_ENABLE_3=0
-export EXCLUDE_SERVER="saarthi saarthi-tmp saarthi-dev"
+export EXCLUDE_SERVER="bhaarti bhaarti-tmp bhaarti-dev"
 export EXCLUDE_FILE=push.sudoers.exclude
-export BASEDIR=/etc/msudoers
+export BASEDIR=/etc/mastsudo
 export WORKDIR=var
 export LOGDIR=log
 export TEMPDIR=tmp
@@ -49,7 +48,7 @@ export CURRENTDATE=`date | awk '{print $3"-"$2"-"$6}'`
 export CURRENTTIMESTAMP=`date | awk '{print $4}' | sed '$ s/:/./g'`
 export SERVER_NAME=`hostname`
 export JUMPSERVER=$SERVER_NAME
-export DOMAIN_NAME=am.lilly.com
+export DOMAIN_NAME=am.mydomain.com
 export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export grabdb=$BASEDIR/$DB_FILE
 export errorfile=$BASEDIR/$LOGDIR/$ERROR_FILE
@@ -358,18 +357,18 @@ echo "Total_number_of_server_in_which_sudo_file_mode_is_changed=$Total_number_of
 
 ########################## Sending Emails ##########################
         if [ $PRIMARY_EMAIL_ENABLE == 1 ]; then
-         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@saarthi.am.lilly.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $PRIMARY_EMAIL
+         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@bhaarti.am.mydomain.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $PRIMARY_EMAIL
         fi
 
         if [ $SECONDARY_EMAIL_ENABLE_1 == 1 ]; then
-         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@saarthi.am.lilly.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_1
+         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@bhaarti.am.mydomain.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_1
         fi
 
         if [ $SECONDARY_EMAIL_ENABLE_2 == 1 ]; then
-         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@saarthi.am.lilly.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_2
+         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@bhaarti.am.mydomain.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_2
         fi
 
         if [ $SECONDARY_EMAIL_ENABLE_3 == 1 ]; then
-         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@saarthi.am.lilly.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_3
+         echo "Push_sudo_new reports on $CURRENTDATE" | mailx -s "Push_sudo_new reports on $CURRENTDATE" -r sudo_repoter@bhaarti.am.mydomain.com -a $goodfile -a $errorfile -a $excludelogfile -a $summaryfile $SECONDARY_EMAIL_3
         fi
 ########################## End Sending Emails ##########################
